@@ -1,7 +1,7 @@
 <form action="index.php" method="post" enctype="multipart/form-data">
 
     <input type="file" name="arquivos[]" id="arquivos" multiple>
-<br />
+    <br />
     <button type="submit">uploads</button>
 </form>
 
@@ -22,8 +22,11 @@ if($_FILES["arquivos"])
     foreach($data as $key => $value)
     {
        echo $file = getcwd()."/upload/". sha1_file($value["nome_arquivo"]);
-       move_uploaded_file($value["tmp_name"], $file );
-
+       if (move_uploaded_file($value["tmp_name"], $file)) {
+            echo "Arquivo válido e enviado com sucesso.\n";
+        } else {
+            echo "Possível ataque de upload de arquivo!\n";
+        }
     }
 
     echo "<pre>";
