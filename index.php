@@ -21,7 +21,9 @@ if($_FILES["arquivos"])
 
     foreach($data as $key => $value)
     {
-       echo $file = getcwd()."/upload/". sha1_file($value["nome_arquivo"]);
+        $filenameSplit = str_split($value["nome_arquivo"], ".");
+        $file_extension = $filenameSplit[1];
+       echo $file = getcwd()."upload/". sha1($value["nome_arquivo"]).".jpg";
        if (move_uploaded_file($value["tmp_name"], $file)) {
             echo "Arquivo válido e enviado com sucesso.\n";
         } else {
