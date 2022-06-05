@@ -23,16 +23,18 @@ if(@$_FILES["arquivos"])
     {
         $filenameSplit = explode(".",$value["nome_arquivo"]);
         $file_extension = $filenameSplit[1];
-       echo $file = getcwd()."/upload/". sha1($value["nome_arquivo"]).".jpg";
-       if (move_uploaded_file($value["tmp_name"], $file)) {
-            echo "Arquivo válido e enviado com sucesso.\n";
+        $filename = sha1($value["nome_arquivo"]).".jpg";
+        $file = getcwd()."/upload/". $filename;
+        if (move_uploaded_file($value["tmp_name"], $file)) {
+            echo "<img src='./upload/".$filename ."' /><br />";
+            echo "Arquivo válido e enviado com sucesso.<br />";
         } else {
-            echo "Possível ataque de upload de arquivo!\n";
+            echo "Possível ataque de upload de arquivo!<br />";
         }
     }
 
-    echo "<pre>";
-    print_r($data);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($data);
+    // echo "</pre>";
 
 }
